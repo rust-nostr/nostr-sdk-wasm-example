@@ -1,0 +1,14 @@
+[package]
+name = "nostr-sdk-wasm-example"
+version = "0.1.0"
+edition = "2021"
+readme = "README.md"
+license = "MIT"
+keywords = ["yew", "trunk"]
+categories = ["gui", "wasm", "web-programming"]
+
+[dependencies]
+nostr-sdk = { git = "https://github.com/rust-nostr/nostr", rev = "ec5e89211eb7fcad6c630d148c50bcb7b167b007" }
+wasm-bindgen-futures = "0.4"
+web-sys = "0.3"
+yew = { version = "0.20", features = ["csr"] }
