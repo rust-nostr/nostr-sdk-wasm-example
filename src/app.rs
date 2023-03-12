@@ -12,7 +12,7 @@ pub fn app() -> Html {
         let url = Url::parse("http://127.0.0.1:7773").unwrap();
         let client = Client::new(&keys, url);
 
-        /* let contacts = client.get_contact_list_metadata(None).await.unwrap();
+        /* let contacts = client.get_contact_list_metadata().await.unwrap();
         console::log_1(&format!("{contacts:?}").into()); */
 
         client
@@ -21,7 +21,7 @@ pub fn app() -> Html {
             .unwrap();
 
         let filter = Filter::new().author(keys.public_key());
-        let events = client.get_events_of(vec![filter], None).await.unwrap();
+        let events = client.get_events_of(vec![filter]).await.unwrap();
         console::log_1(&format!("{events:?}").into());
     });
 
