@@ -3,26 +3,55 @@ use wasm_bindgen_futures::spawn_local;
 use web_sys::console;
 use yew::prelude::*;
 
+const BECH32_SK: &str = "nsec1ufnus6pju578ste3v90xd5m2decpuzpql2295m3sknqcjzyys9ls0qlc85";
+
 #[function_component(App)]
 pub fn app() -> Html {
     spawn_local(async {
-        let keys =
-            Keys::from_sk_str("nsec1ufnus6pju578ste3v90xd5m2decpuzpql2295m3sknqcjzyys9ls0qlc85")
-                .unwrap();
-        let url = Url::parse("http://127.0.0.1:7773").unwrap();
-        let client = Client::new(&keys, url);
+        let secret_key = SecretKey::from_bech32(BECH32_SK).unwrap();
+        let keys = Keys::new(secret_key);
+        let client = Client::new(&keys);
 
-        /* let contacts = client.get_contact_list_metadata().await.unwrap();
-        console::log_1(&format!("{contacts:?}").into()); */
+        client.add_relay("ws://192.168.7.233:7777").await.unwrap();
+        client.add_relay("wss://relay.damus.io").await.unwrap();
 
-        client
-            .publish_text_note("Hello from nostr-sdk WASM!", &[])
+        client.connect().await;
+
+        // Publish text note
+        let event_id = client
+            .publish_text_note("Testing nostr-sdk WASM", &[])
             .await
             .unwrap();
+        console::log_1(&format!("Event id: {event_id}").into());
 
-        let filter = Filter::new().author(keys.public_key());
-        let events = client.get_events_of(vec![filter]).await.unwrap();
-        console::log_1(&format!("{events:?}").into());
+        // Get events using `get_events_of` method
+        let filter = Filter::new().limit(10);
+        let events = client.get_events_of(vec![filter], None).await.unwrap();
+        console::log_1(&format!("Events: {events:?}").into());
+
+        // Get contact list
+        let contacts = client.get_contact_list_metadata(None).await.unwrap();
+        console::log_1(&format!("Contacts: {contacts:?}").into());
+
+        // Subscribe to filters
+        let subscription = Filter::new()
+        .pubkey(keys.public_key())
+        .since(Timestamp::now());
+        client.subscribe(vec![subscription]).await;
+        let mut notifications = client.notifications();
+        while let Ok(notification) = notifications.recv().await {
+            if let RelayPoolNotification::Event(_url, event) = notification {
+                if event.kind == Kind::EncryptedDirectMessage {
+                    if let Ok(msg) = decrypt(&keys.secret_key().unwrap(), &event.pubkey, &event.content) {
+                        console::log_1(&format!("New DM: {msg}").into());
+                    } else {
+                        console::log_1(&"Impossible to decrypt direct message".into());
+                    }
+                } else {
+                    console::log_1(&format!("{event:?}").into());
+                }
+            }
+        }
     });
 
     html! {
