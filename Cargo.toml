@@ -8,7 +8,7 @@ keywords = ["yew", "trunk"]
 categories = ["gui", "wasm", "web-programming"]
 
 [dependencies]
-nostr-sdk = { git = "https://github.com/rust-nostr/nostr", rev = "de1371c661318204a9096d68ba3131be0bf9c6fd" }
+nostr-sdk = { git = "https://github.com/rust-nostr/nostr", rev = "3d95d689210c0f2200792d97ed9fab0a46abe015" }
 wasm-bindgen-futures = "0.4"
 wasm-logger = "0.2"
 web-sys = "0.3"

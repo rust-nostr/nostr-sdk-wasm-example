@@ -183,9 +183,9 @@ dependencies = [
 
 [[package]]
 name = "cpufeatures"
-version = "0.2.5"
+version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28d997bd5e24a5928dd43e46dc529867e207907fe0b239c3477d924f7f2ca320"
+checksum = "280a9f2d8b3a38871a3c8a46fb80db65e5e5ed97da80c4d08bf27fb63e35e181"
 dependencies = [
  "libc",
 ]
@@ -732,7 +732,7 @@ dependencies = [
 [[package]]
 name = "nostr"
 version = "0.19.5"
-source = "git+https://github.com/rust-nostr/nostr?rev=de1371c661318204a9096d68ba3131be0bf9c6fd#de1371c661318204a9096d68ba3131be0bf9c6fd"
+source = "git+https://github.com/rust-nostr/nostr?rev=3d95d689210c0f2200792d97ed9fab0a46abe015#3d95d689210c0f2200792d97ed9fab0a46abe015"
 dependencies = [
  "aes",
  "base64 0.21.0",
@@ -755,7 +755,7 @@ dependencies = [
 [[package]]
 name = "nostr-sdk"
 version = "0.19.1"
-source = "git+https://github.com/rust-nostr/nostr?rev=de1371c661318204a9096d68ba3131be0bf9c6fd#de1371c661318204a9096d68ba3131be0bf9c6fd"
+source = "git+https://github.com/rust-nostr/nostr?rev=3d95d689210c0f2200792d97ed9fab0a46abe015#3d95d689210c0f2200792d97ed9fab0a46abe015"
 dependencies = [
  "gloo-timers",
  "log",
@@ -769,7 +769,7 @@ dependencies = [
 [[package]]
 name = "nostr-sdk-net"
 version = "0.19.0"
-source = "git+https://github.com/rust-nostr/nostr?rev=de1371c661318204a9096d68ba3131be0bf9c6fd#de1371c661318204a9096d68ba3131be0bf9c6fd"
+source = "git+https://github.com/rust-nostr/nostr?rev=3d95d689210c0f2200792d97ed9fab0a46abe015#3d95d689210c0f2200792d97ed9fab0a46abe015"
 dependencies = [
  "futures-channel",
  "futures-util",
