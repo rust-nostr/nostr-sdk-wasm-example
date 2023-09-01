@@ -37,6 +37,14 @@ Rebuilds the app whenever a change is detected and runs a local server to host i
 
 There's also the `trunk watch` command which does the same thing but without hosting it.
 
+On macOS you need to install `llvm`:
+
+```bash
+brew install llvm
+LLVM_PATH=$(brew --prefix llvm)
+AR="${LLVM_PATH}/bin/llvm-ar" CC="${LLVM_PATH}/bin/clang" trunk serve
+```
+
 ### Release
 
 ```bash
