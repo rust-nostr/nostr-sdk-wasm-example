@@ -8,8 +8,9 @@ keywords = ["yew", "trunk"]
 categories = ["gui", "wasm", "web-programming"]
 
 [dependencies]
-nostr-sdk = "0.20"
+#nostr-sdk = { path = "../../nostr/nostr/crates/nostr-sdk" }
+nostr-sdk = { git = "https://github.com/rust-nostr/nostr", rev = "22cfca6c974641ba7c50e72d19b30aa44769b304" }
+tracing-wasm = "0.2"
 wasm-bindgen-futures = "0.4"
-wasm-logger = "0.2"
 web-sys = "0.3"
 yew = { version = "0.20", features = ["csr"] }
